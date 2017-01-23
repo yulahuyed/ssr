@@ -19,7 +19,7 @@ RUN ./configure && make && make install
 RUN echo "/usr/local/lib" > /etc/ld.so.conf.d/local.conf
 RUN ldconfig && cd .. && rm -rf libsodium-1.0.11
 
-RUN git clone -b manyuser https://github.com/breakwa11/shadowsocks.git /root/ssr
+RUN git clone -b manyuser https://github.com/shadowsocksr/shadowsocksr.git /root/ssr
 
 RUN git clone https://github.com/snooda/net-speeder.git net-speeder
 WORKDIR net-speeder
