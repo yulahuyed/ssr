@@ -19,5 +19,4 @@ echo "========================================================================"
 nohup /usr/sbin/sshd -D &
 nohup /usr/local/bin/net_speeder eth0 "ip" >/dev/null 2>&1 &
 #python /root/ssr/shadowsocks/server.py "$@"
-cd /root/ssr/shadowsocks
-./server.py -s 0.0.0.0 -p 8080 -m chacha20-ietf  -k $SSRPASS -o tls1.2_ticket_auth -O origin -d start
+python /root/ssr/shadowsocks/server.py -s 0.0.0.0 -p 8388 -m chacha20-ietf -k $SSRPASS -o tls1.2_ticket_auth -O auth_aes128_sha1
