@@ -23,4 +23,8 @@ COPY entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/net_speeder
 
+RUN apt-get install -y python-setuptools; apt-get clean all
+RUN easy_install supervisor
+RUN echo_supervisord_conf > /etc/supervisord.conf
+
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
