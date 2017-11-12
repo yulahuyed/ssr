@@ -1,15 +1,9 @@
 # shadowsocksr-net-speeder 
 FROM ubuntu:14.04.5
-MAINTAINER lnterface [https://github.com/lnterface/ssr-with-net_speeder]
+MAINTAINER YHIBLOG [shui.azurewebsites.net]
 RUN apt-get update && \
     apt-get install -y pwgen wget python python-pip python-m2crypto libnet1-dev libpcap0.8-dev git gcc openssh-server && \
     apt-get clean all
-
-#ssh
-RUN mkdir /var/run/sshd
-RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
-RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
-EXPOSE 22
 
 #install libsodium support chacha20
 RUN wget --no-check-certificate -O libsodium-1.0.11.tar.gz https://github.com/jedisct1/libsodium/releases/download/1.0.11/libsodium-1.0.11.tar.gz &&\
@@ -19,7 +13,7 @@ RUN ./configure && make && make install
 RUN echo "/usr/local/lib" > /etc/ld.so.conf.d/local.conf
 RUN ldconfig && cd .. && rm -rf libsodium-1.0.11
 
-RUN git clone -b manyuser https://github.com/shadowsocksr/shadowsocksr.git /root/ssr
+RUN git clone -b manyuser https://github.com/shadowsocksr-backup/shadowsocksr.git /root/ssr
 
 RUN git clone https://github.com/snooda/net-speeder.git net-speeder
 WORKDIR net-speeder
