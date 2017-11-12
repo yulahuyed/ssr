@@ -120,4 +120,4 @@ stderr_logfile_maxbytes=0" \
 fi
 
 # run
-/usr/bin/supervisord
+/usr/local/bin/supervisord
