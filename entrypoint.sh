@@ -54,7 +54,7 @@ sed -i 's#\[supervisorctl\]#;\[supervisorctl\]#' /etc/supervisord.conf
 sed -i 's#serverurl=unix:///tmp/superv#;serverurl=unix:///tmp/superv#' /etc/supervisord.conf
 echo "
 [program:ssr]
-command=/usr/bin/python /shadowsocksr/shadowsocks/server.py -p ${PARAM_SSR_PORT} -k ${PARAM_SSR_PASSWORD} -m ${PARAM_SSR_METHOD} -O ${PARAM_SSR_PROTOCOL} -o ${PARAM_SSR_OBFS} --fast-open -qq --user nobody
+command=/usr/bin/python /root/ssr/shadowsocks/server.py -p ${PARAM_SSR_PORT} -k ${PARAM_SSR_PASSWORD} -m ${PARAM_SSR_METHOD} -O ${PARAM_SSR_PROTOCOL} -o ${PARAM_SSR_OBFS} --fast-open -qq --user nobody
 stdout_logfile=/dev/stdout
 stdout_logfile_maxbytes=0
 stderr_logfile=/dev/stderr
@@ -106,7 +106,7 @@ then
     echo "----- ----- ----- ----- -----"
     echo "
 [program:netspeeder]
-command=/net-speeder/net_speeder ${PARAM_NS_DEVICE} \"ip\"
+command=/usr/local/bin/net_speeder ${PARAM_NS_DEVICE} \"ip\"
 stdout_logfile=/dev/stdout
 stdout_logfile_maxbytes=0
 stderr_logfile=/dev/stderr
