@@ -23,4 +23,6 @@ COPY entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/net_speeder
 
+EXPOSE 80 443 36000 8080 8989 8888 8090 10000 5000
+
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
