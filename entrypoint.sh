@@ -44,23 +44,6 @@ else
     PARAM_NS_DEVICE="eth0"
 fi
 
-# supervisor
-sed -i 's#nodaemon=false#nodaemon=true#' /etc/supervisord.conf
-sed -i 's#\[unix_http_server\]#;\[unix_http_server\]#' /etc/supervisord.conf
-sed -i 's#file=/tmp/supervisor.sock#;file=/tmp/supervisor.sock#' /etc/supervisord.conf
-sed -i 's#\[rpcinterface:supervisor\]#;\[rpcinterface:supervisor\]#' /etc/supervisord.conf
-sed -i 's#supervisor.rpcinterface_f#;supervisor.rpcinterface_f#' /etc/supervisord.conf
-sed -i 's#\[supervisorctl\]#;\[supervisorctl\]#' /etc/supervisord.conf
-sed -i 's#serverurl=unix:///tmp/superv#;serverurl=unix:///tmp/superv#' /etc/supervisord.conf
-echo "
-[program:ssr]
-command=/usr/bin/python /root/ssr/shadowsocks/server.py -p ${PARAM_SSR_PORT} -k ${PARAM_SSR_PASSWORD} -m ${PARAM_SSR_METHOD} -O ${PARAM_SSR_PROTOCOL} -o ${PARAM_SSR_OBFS} --fast-open -qq --user nobody
-stdout_logfile=/dev/stdout
-stdout_logfile_maxbytes=0
-stderr_logfile=/dev/stderr
-stderr_logfile_maxbytes=0" \
->> /etc/supervisord.conf
-
 # output
 echo "----- ----- ----- ----- -----"
 echo "----- ----- ----- ----- -----"
@@ -105,19 +88,13 @@ then
     echo "net-speeder ${PARAM_NS_DEVICE} [enabled]"
     echo "----- ----- ----- ----- -----"
     echo "
-[program:netspeeder]
-command=/usr/local/bin/net_speeder ${PARAM_NS_DEVICE} \"ip\"
-stdout_logfile=/dev/stdout
-stdout_logfile_maxbytes=0
-stderr_logfile=/dev/stderr
-stderr_logfile_maxbytes=0" \
->> /etc/supervisord.conf
+    /usr/local/bin/net_speeder ${PARAM_NS_DEVICE} "ip" &
     ip a
-    #ping yahoo.com -c 5
+    ping yahoo.com -c 5
     echo "----- ----- ----- ----- -----"
     echo "----- ----- ----- ----- -----"
     echo "----- ----- ----- ----- -----"
 fi
 
 # run
-/usr/local/bin/supervisord
+/usr/bin/python /root/ssr/shadowsocks/server.py -p ${PARAM_SSR_PORT} -k ${PARAM_SSR_PASSWORD} -m ${PARAM_SSR_METHOD} -O ${PARAM_SSR_PROTOCOL} -o ${PARAM_SSR_OBFS}
