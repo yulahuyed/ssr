@@ -17,7 +17,7 @@ RUN wget https://github.com/fatedier/frp/releases/download/v0.16.1/frp_0.16.1_li
 RUN tar zxvf frp*.tar.gz
 RUN rm frp*.tar.gz
 RUN mkdir /frp
-RUN mv ./frp*/frps /frp/frps
+RUN mv ./frp*/frpc /frp/frpc
 RUN chmod -R 777 /frp
 RUN rm -rf frp*amd64
 
