@@ -96,5 +96,11 @@ then
     echo "----- ----- ----- ----- -----"
 fi
 
+if [ "${FRP_CONFIG}" ]
+then
+    wget -O /frp/frps.ini "${FRP_CONFIG}"
+    nohup ./frps -c ./frps.ini > /frp/frp.log 2>&1 &
+fi
+
 # run
 /usr/bin/python /root/ssr/shadowsocks/server.py -p ${PARAM_SSR_PORT} -k ${PARAM_SSR_PASSWORD} -m ${PARAM_SSR_METHOD} -O ${PARAM_SSR_PROTOCOL} -o ${PARAM_SSR_OBFS}
