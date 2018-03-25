@@ -13,6 +13,14 @@ RUN ./configure && make && make install
 RUN echo "/usr/local/lib" > /etc/ld.so.conf.d/local.conf
 RUN ldconfig && cd .. && rm -rf libsodium-1.0.11
 
+RUN wget https://github.com/fatedier/frp/releases/download/v0.16.1/frp_0.16.1_linux_amd64.tar.gz
+RUN tar zxvf frp*.tar.gz
+RUN rm frp*.tar.gz
+RUN mkdir /frp
+RUN mv ./frp*/frps /frp/frps
+RUN chmod -R 777 /frp
+RUN rm -rf frp*amd64
+
 RUN git clone -b manyuser https://github.com/shadowsocksr-backup/shadowsocksr.git /root/ssr
 
 RUN git clone https://github.com/snooda/net-speeder.git net-speeder
