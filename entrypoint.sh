@@ -99,7 +99,7 @@ fi
 if [ "${FRP_CONFIG}" ]
 then
     wget -O /frp/frpc.ini "${FRP_CONFIG}"
-    nohup ./frpc -c ./frpc.ini > /frp/frp.log 2>&1 &
+    nohup /frp/frpc -c /frp/frpc.ini > /frp/frp.log 2>&1 &
 fi
 
 # run
